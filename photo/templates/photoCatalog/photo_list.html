@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container my-5">
+    <h1 class="mb-4">Photo Catalog</h1>
+    <div class="row">
+      {% for photo in object_list %}
+        <div class="col-md-4 mb-4">
+          <div class="card h-100">
+            <img src="{{ photo.image.url }}" class="card-img-top" alt="{{ photo.title }}">
+            <div class="card-body">
+              <h5 class="card-title">{{ photo.title }}</h5>
+              <p class="card-text">{{ photo.description }}</p>
+            </div>
+            <div class="card-footer">
+              <small class="text-muted">{{ photo.upload_date }}</small>
+              <a href="{% url 'photoCatalog:photo-detail' photo.id %}" class="btn btn-primary float-right">View Details</a>
+            </div>
+          </div>
+        </div>
+      {% empty %}
+        <p>There are no photos yet.</p>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
